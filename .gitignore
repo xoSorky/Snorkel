@@ -42,6 +42,7 @@ build/Release
 node_modules/
 jspm_packages/
 !node_modules/mineflayer/lib/plugins/entities.js
+!node_modules\mineflayer\lib\plugins\entities.js
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
