@@ -9,4 +9,5 @@ export async function joinPit() {
         console.log('snorkel joined pit!');
         await sleep(5000);
     }
+    else return;
 }

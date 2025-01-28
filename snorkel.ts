@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { Authflow } from 'prismarine-auth';
 import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
-import { webhookLogin } from './discord/discord-bot.ts';
+import { webhookGainedXP, webhookJoinedPit, webhookKicked, webhookLogin, webhookMentioned } from './discord/discord-bot.ts';
 import { joinPit } from './utils/join-pit.ts'
 import { sleep } from './utils/utils.ts'
 
@@ -47,22 +47,34 @@ export class Snorkel {
     }
 
     async initEvents() {
-        this.bot.once('login', async () => {
+        this.bot.on('login', async () => {
             console.log(`Snorkel Logged in to ${this.host}!`);
-            webhookLogin();
-        
-            await new Promise((resolve) => setTimeout(resolve, 5000));
+            webhookLogin(this.host);
+            await sleep(5000)
             await joinPit();
+            webhookJoinedPit();
         });
 
-        this.bot.on('kicked', (reason, loggedIn) => {
-            console.log(`Snorkel kicked: ${reason}`)
-            console.log(`Was connected: ${loggedIn}`)
+        this.bot.on('kicked', async (reason, loggedIn) => {
+            webhookKicked(reason, loggedIn);
+            await sleep(10000)
+
         });
 
         this.bot.on('message', async (msg) => {
             const msg2: string = msg.toString();
             console.log(msg2);
+
+            if (msg2.includes("Snorkel")) {
+                webhookMentioned(msg2)
+            }
+            if (msg2.includes("FREE XP! for participation ")) {
+                let contents = msg2.split("+");
+                let aaa = contents[1]
+                let bbb = aaa.split("XP")
+                let xpValue = bbb[0];
+                webhookGainedXP(xpValue)
+            }
         });
     }
 }
