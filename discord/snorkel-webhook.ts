@@ -48,7 +48,7 @@ export function webhookKicked(reason, wasConnected) {
     }).catch(console.error)
 }
 
-export function webhookGainedXP(xpValue, sessionXP) {
+export function webhookGainedXP(xpValue: number, sessionXP: number) {
     if (process.env.SNORKEL_WEBHOOK === undefined) {
         console.error(`No Snorkel Channel Webhook. Please add one in the environment variables! (.env/SNORKEL_WEBHOOK)`)
         return;

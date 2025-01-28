@@ -6,10 +6,11 @@ import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
 import { joinPit } from './utils/join-pit.ts'
 import { sleep } from './utils/utils.ts'
 import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.ts';
-import {  } from './discord/snorkel-event-ended.ts'
+import { webhookQuickMaths } from './discord/snorkel-event-webhook.ts'
 import { webhookLevelUp } from './discord/snorkel-levels.ts'
 import { webhookMentioned } from './discord/snorkel-mentions.ts'
 import { processXP, updateSessionXP } from './utils/session.ts'
+import { quickMaths } from './helper/event-helper.ts';
 
 const botArgs = {
     host: 'ilovecatgirls.xyz',
@@ -76,15 +77,20 @@ export class Snorkel {
                 let contents = msg2.split("+");
                 let a = contents[1]
                 let b = a.split("XP")
-                let xpValue = b[0];
+                let xpValue = Number(b[0]);
                 updateSessionXP(xpValue);
                 await sleep(1000);
                 processXP(xpValue)
             }
+            if (msg2.startsWith("QUICK MATHS! Solve: ")) {
+                quickMaths(msg2);
+            }
+            if (msg2.includes("SnorkelOpps".toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
+                webhookQuickMaths(msg2);
+            }
         });
     }
 }
-
 
 const snorkel = new Snorkel();
 snorkel.initBot();
@@ -105,3 +111,14 @@ export const bot = snorkel.bot;
 //   #2 [92] Lion_134 with 1511g
 //   #3 [83] MorpheaZ with 1107g
 // ----------------------
+
+// QUICK MATHS! First 5 players to answer gain +250XP +500g
+// QUICK MATHS! Solve: 14x11
+// QUICK MATHS! #1 [63] Monecika answered in 3.65s
+// QUICK MATHS! #2 [77] Joontis answered in 4s
+// QUICK MATHS! #3 [64] samwy781 answered in 4.15s
+// QUICK MATHS! #4 [82] PiyanistMC answered in 5.05s
+// QUICK MATHS! #5 [82] LowTierFour answered in 5.55s
+// QUICK MATHS OVER! 14x11 = 154
+
+// MINOR EVENT! KOTL in Sky Area ende
