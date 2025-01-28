@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "chalk": "^5.4.1",
+    "discord": "^0.8.2",
+    "discord.js": "^14.17.3",
     "dotenv": "^16.4.7",
     "env": "^0.0.2",
     "mineflayer": "^4.0.0",

@@ -3,6 +3,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { Authflow } from 'prismarine-auth';
 import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
+import { webhookLogin } from './discord/discord-bot.ts';
+import { joinPit } from './utils/join-pit.ts'
+import { sleep } from './utils/utils.ts'
 
 const botArgs = {
     host: 'ilovecatgirls.xyz',
@@ -29,7 +32,7 @@ export class Snorkel {
 
     async initBot() {
         if (!this.email || !this.password) {
-            console.error(`No Email or Password. Please set the Environment Variables "SNORKEL_EMAIL", as well as "SNORKEL_PASSWORD in the .env file.`)
+            console.error(`No Email or Password. Please set the Environment Variables: "SNORKEL_EMAIL" & "SNORKEL_PASSWORD in the .env file.`)
             return;
         }
         this.bot = mineflayer.createBot({
@@ -45,7 +48,11 @@ export class Snorkel {
 
     async initEvents() {
         this.bot.once('login', async () => {
-            console.log(`Snorkel Logged in to ${this.host}!`)
+            console.log(`Snorkel Logged in to ${this.host}!`);
+            webhookLogin();
+        
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+            await joinPit();
         });
 
         this.bot.on('kicked', (reason, loggedIn) => {
@@ -62,3 +69,10 @@ export class Snorkel {
 
 const snorkel = new Snorkel();
 snorkel.initBot();
+export const bot = snorkel.bot;
+
+
+
+
+// messages to check
+// FREE XP! for participation +13XP
