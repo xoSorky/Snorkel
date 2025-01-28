@@ -2,8 +2,7 @@ import { Snorkel, startTime } from "../snorkel.ts";
 
 export function currentTime() {
     const date = new Date();
-    const estOffset = -5 * 60 * 60 * 1000; // 5 hours behind UTC (est)
-    const estTime = new Date(date.getTime() + estOffset);
+    const estTime = new Date(date.getTime());
     return estTime;
 }
 
