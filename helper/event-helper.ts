@@ -2,7 +2,7 @@ import { bot } from "../snorkel.ts";
 import { sleep } from "../utils/utils.ts";
 import { webhookQuickMaths } from "../discord/snorkel-event-webhook.ts";
 
-async function quickMaths(message: string) {
+export async function quickMaths(message: string) {
     const startTime = Date.now();
     const mathProblem = message.replace('QUICK MATHS! Solve: ', '').replace('x', '*');
     const result = Math.floor(this.evalMath(mathProblem));
