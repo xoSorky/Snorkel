@@ -3,9 +3,13 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { Authflow } from 'prismarine-auth';
 import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
-import { webhookGainedXP, webhookJoinedPit, webhookKicked, webhookLogin, webhookMentioned } from './discord/discord-bot.ts';
 import { joinPit } from './utils/join-pit.ts'
 import { sleep } from './utils/utils.ts'
+import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.ts';
+import {  } from './discord/snorkel-event-ended.ts'
+import { webhookLevelUp } from './discord/snorkel-levels.ts'
+import { webhookMentioned } from './discord/snorkel-mentions.ts'
+import { processXP, updateSessionXP } from './utils/session.ts'
 
 const botArgs = {
     host: 'ilovecatgirls.xyz',
@@ -43,7 +47,7 @@ export class Snorkel {
             auth: 'microsoft',
         });
         this.bot.physicsEnabled = true;
-        this.initEvents();
+        await this.initEvents();
     }
 
     async initEvents() {
@@ -68,23 +72,36 @@ export class Snorkel {
             if (msg2.includes("Snorkel")) {
                 webhookMentioned(msg2)
             }
-            if (msg2.includes("FREE XP! for participation ")) {
+            if (msg2.startsWith("FREE XP! for participation ")) {
                 let contents = msg2.split("+");
-                let aaa = contents[1]
-                let bbb = aaa.split("XP")
-                let xpValue = bbb[0];
-                webhookGainedXP(xpValue)
+                let a = contents[1]
+                let b = a.split("XP")
+                let xpValue = b[0];
+                updateSessionXP(xpValue);
+                await sleep(1000);
+                processXP(xpValue)
             }
         });
     }
 }
 
+
 const snorkel = new Snorkel();
 snorkel.initBot();
+export const startTime = Date.now()
 export const bot = snorkel.bot;
 
-
-
-
 // messages to check
+
 // FREE XP! for participation +13XP
+
+// ----------------------
+// PIT EVENT ENDED: ROBBERY [INFO]
+// Your rewards: +50g
+// Bonus for all: MISSED! need to be there at the beginning of the event
+// You: 50g (ranked #27)
+// Top players:
+//   #1 [88] Darkaid_ITA with 3136g
+//   #2 [92] Lion_134 with 1511g
+//   #3 [83] MorpheaZ with 1107g
+// ----------------------
