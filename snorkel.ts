@@ -6,7 +6,7 @@ import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
 import { joinPit } from './utils/join-pit.ts'
 import { sleep } from './utils/utils.ts'
 import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.ts';
-import { webhookQuickMaths } from './discord/snorkel-event-webhook.ts'
+import { webhookMajorEvent, webhookMinorEvent, webhookQuickMaths } from './discord/snorkel-event-webhook.ts'
 import { webhookLevelUp } from './discord/snorkel-levels.ts'
 import { webhookMentioned } from './discord/snorkel-mentions.ts'
 import { processXP, updateSessionXP } from './utils/session.ts'
@@ -60,13 +60,11 @@ export class Snorkel {
             webhookJoinedPit();
         });
 
-        this.bot.on('kicked', async (reason, loggedIn) => {
+        this.bot.on('kicked', async (reason: string, loggedIn: boolean) => {
             webhookKicked(reason, loggedIn);
-            await sleep(10000)
-
         });
 
-        this.bot.on('message', async (msg) => {
+        this.bot.on('message', async (msg: string) => {
             const msg2: string = msg.toString();
             console.log(msg2);
 
@@ -87,6 +85,12 @@ export class Snorkel {
             }
             if (msg2.includes("SnorkelOpps".toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
                 webhookQuickMaths(msg2);
+            }
+            if (msg2.includes("MINOR EVENT!")) {
+                webhookMinorEvent(msg2);
+            }
+            if (msg2.includes("PIT EVENT ENDED:") || msg2.includes("MAJOR EVENT!")) {
+                webhookMajorEvent(msg2);
             }
         });
     }

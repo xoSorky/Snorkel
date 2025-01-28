@@ -16,3 +16,11 @@ export async function quickMaths(message: string) {
 function evalMath(expression: string): number {
     return new Function(`return (${expression});`)();
 }
+
+function logMinorEvents() {
+    
+}
+
+function logMajorEvents() {
+
+}
