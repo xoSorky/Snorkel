@@ -115,13 +115,16 @@ export class Snorkel {
                 await sleep(1000)
                 this.bot.chat("gg")
             }
-            this.bot.on('physicsTick', async () => {
-                let [lobby, level, gold] = getScoreboardData()
-                if (!(lobby.startsWith("M"))) {
-                    await this.rejoinPit();
-                }
-            })
+            if (msg2.includes("PIT LEVEL UP!")) {
+                
+            }
         });
+        this.bot.on('physicsTick', async () => {
+            let [lobby, level, gold] = getScoreboardData()
+            if (!(lobby.startsWith("M"))) {
+                await this.rejoinPit();
+            }
+        })
     }
 
     retryConnection() {

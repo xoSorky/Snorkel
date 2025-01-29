@@ -6,7 +6,7 @@ import { Snorkel, startTime } from "../snorkel.ts";
 import { currentTime } from '../utils/date-handler.ts'
 import { getActiveTime } from '../utils/date-handler.ts'
 
-export function webhookLevelUp() {
+export function webhookLevelUp(message) {
     if (process.env.SNORKEL_LEVELS_WEBHOOK === undefined) {
         console.error(`No Levels Channel Webhook. Please add one in the environment variables! (.env/SNORKEL_LEVEL_WEBHOOK)`)
         return;
@@ -14,6 +14,7 @@ export function webhookLevelUp() {
     const webhook = new WebhookClient({ url: process.env.SNORKEL_LEVELS_WEBHOOK });
     const embed = new EmbedBuilder()
     .setTitle('AFK Bot by Sorky')
+    .addFields({ name: 'Snorkel AFK', value: `${message}`})
     .setDescription('Snorkel AFK')
     .setFooter({ text: `Runtime: ${getActiveTime()} * Today at ${currentTime()}`})
     .setThumbnail('https://imgur.com/a/fK4P0yo')
