@@ -8,5 +8,28 @@
     "mineflayer": "^4.0.0",
     "prismarine-auth": "^2.6.0",
     "ts": "^0.0.0"
-  }
+  },
+  "name": "snorkel",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --env-file=.env ./dist/snorkel.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xoSorky/Snorkel.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xoSorky/Snorkel/issues"
+  },
+  "homepage": "https://github.com/xoSorky/Snorkel#readme",
+  "description": ""
 }

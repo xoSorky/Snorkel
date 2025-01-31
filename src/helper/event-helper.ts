@@ -1,7 +1,6 @@
-import { bot } from "../snorkel.ts";
-import { sleep } from "../utils/utils.ts";
-import { webhookMinorEvent, webhookQuickMaths } from "../discord/snorkel-event-webhook.ts";
-import { parse } from "dotenv";
+import { bot } from "../snorkel.js";
+import { sleep } from "../utils/utils.js";
+import { webhookQuickMaths } from "../discord/snorkel-event-webhook.js";
 
 export async function quickMaths(message: string) {
     const mathProblem = message.replace('QUICK MATHS! Solve: ', '').replace('x', '*');

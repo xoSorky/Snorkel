@@ -1,15 +1,14 @@
 import mineflayer from 'mineflayer';
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
-import { sleep } from './utils/utils.ts';
-import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.ts';
-import { webhookMajorEvent, webhookMinorEvent, webhookQuickMaths } from './discord/snorkel-event-webhook.ts';
-import { webhookMentioned } from './discord/snorkel-mentions.ts';
-import { processXP, updateSessionXP } from './utils/session.ts';
-import { quickMaths } from './helper/event-helper.ts';
-import { getScoreboardData } from './utils/scoreboard-data.ts';
-import { webhookLevelUp } from './discord/snorkel-levels.ts';
+import { sleep } from './utils/utils.js';
+import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.js';
+import { webhookMajorEvent, webhookMinorEvent, webhookQuickMaths } from './discord/snorkel-event-webhook.js';
+import { webhookMentioned } from './discord/snorkel-mentions.js';
+import { processXP, updateSessionXP } from './utils/session.js';
+import { quickMaths } from './helper/event-helper.js';
+import { getScoreboardData } from './utils/scoreboard-data.js';
+import { webhookLevelUp } from './discord/snorkel-levels.js';
 
 const botArgs = {
     host: 'hypixel.net',

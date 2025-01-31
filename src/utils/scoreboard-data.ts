@@ -1,4 +1,4 @@
-import { bot } from "../snorkel.ts";
+import { bot } from "../snorkel.js";
 
 export function getScoreboardData() {
     const items = bot.scoreboard?.sidebar?.items;

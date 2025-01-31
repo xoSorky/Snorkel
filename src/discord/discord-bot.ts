@@ -2,7 +2,7 @@ import { EmbedBuilder } from '@discordjs/builders';
 import { Client, Collection, Events, GatewayIntentBits, WebhookClient } from 'discord.js'
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { Snorkel } from "../snorkel.ts";
+import { Snorkel } from "../snorkel.js";
 
 export function webhookExample() {
     const webhook = new WebhookClient({ url: 'https://discord.com/api/webhooks/1333651958841479261/OeSsCWIdpvZPt6IBpTkP5tDttC7_Arh6UC4MMAnnIgEsMxzqomSJ223-FXLif0Ny_weJ' });

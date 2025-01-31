@@ -1,4 +1,4 @@
-import { Snorkel, startTime } from "../snorkel.ts";
+import { Snorkel, startTime } from "../snorkel.js";
 
 export function currentTime() {
     const date = new Date();

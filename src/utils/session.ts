@@ -1,4 +1,4 @@
-import { webhookGainedXP } from "../discord/snorkel-webhook.ts";
+import { webhookGainedXP } from "../discord/snorkel-webhook.js";
 
 
 export let sessionXP = 0;
