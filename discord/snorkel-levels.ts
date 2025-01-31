@@ -6,7 +6,7 @@ import { Snorkel, startTime } from "../snorkel.ts";
 import { currentTime } from '../utils/date-handler.ts'
 import { getActiveTime } from '../utils/date-handler.ts'
 
-export function webhookLevelUp(message) {
+export function webhookLevelUp(message: string) {
     if (process.env.SNORKEL_LEVELS_WEBHOOK === undefined) {
         console.error(`No Levels Channel Webhook. Please add one in the environment variables! (.env/SNORKEL_LEVEL_WEBHOOK)`)
         return;

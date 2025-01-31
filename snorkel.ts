@@ -1,16 +1,15 @@
 import mineflayer from 'mineflayer';
 import * as dotenv from 'dotenv';
 dotenv.config();
-import { Authflow } from 'prismarine-auth';
 import { colorMap, colorizeMessage } from './utils/chalk-config.ts';
-import { sleep } from './utils/utils.ts'
+import { sleep } from './utils/utils.ts';
 import { webhookLogin, webhookKicked, webhookGainedXP, webhookJoinedPit } from './discord/snorkel-webhook.ts';
-import { webhookMajorEvent, webhookMinorEvent, webhookQuickMaths } from './discord/snorkel-event-webhook.ts'
-import { webhookLevelUp } from './discord/snorkel-levels.ts'
-import { webhookMentioned } from './discord/snorkel-mentions.ts'
-import { processXP, updateSessionXP } from './utils/session.ts'
+import { webhookMajorEvent, webhookMinorEvent, webhookQuickMaths } from './discord/snorkel-event-webhook.ts';
+import { webhookMentioned } from './discord/snorkel-mentions.ts';
+import { processXP, updateSessionXP } from './utils/session.ts';
 import { quickMaths } from './helper/event-helper.ts';
 import { getScoreboardData } from './utils/scoreboard-data.ts';
+import { webhookLevelUp } from './discord/snorkel-levels.ts';
 
 const botArgs = {
     host: 'hypixel.net',
@@ -75,7 +74,7 @@ export class Snorkel {
     async initEvents() {
         this.bot.on('login', async () => {
             webhookLogin(this.host);
-            await sleep(5000)
+            await sleep(5000);
             this.reconnecting = false;
         });
 
@@ -89,7 +88,7 @@ export class Snorkel {
             const msg2: string = msg.toString();
             console.log(msg2);
 
-            if (msg2.includes("Snorkel")) {
+            if (msg2.includes(this.bot.username.toString().toLowerCase())) {
                 webhookMentioned(msg2)
             }
             if (msg2.startsWith("FREE XP! for participation ")) {
@@ -116,7 +115,7 @@ export class Snorkel {
                 this.bot.chat("gg")
             }
             if (msg2.includes("PIT LEVEL UP!")) {
-                
+                webhookLevelUp(msg2)
             }
         });
         this.bot.on('physicsTick', async () => {
