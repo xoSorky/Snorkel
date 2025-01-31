@@ -5,6 +5,10 @@ export function getScoreboardData() {
     const lobbyID = items?.find((x) => x.displayName.toString().includes("/"));
     const botLevel = items?.find((x) => x.displayName.toString().includes("["));
     const botGold = items?.find((x) => x.displayName.toString().includes("g"));
+    if (!items) {
+        bot.chat("/l");
+        return ["-1", "-1", "-1"];
+    }
     try {
         const lobbyText = lobbyID?.displayName.toString().replace(/[^\x00-\x7F]/g, "");
         const levelText = botLevel?.displayName.toString().replace(/[^\x00-\x7F]/g, "");
