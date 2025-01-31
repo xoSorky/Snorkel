@@ -154,29 +154,3 @@ process.on('unhandledRejection', (reason) => {
 
 export const startTime = Date.now()
 export const bot = snorkel.bot;
-
-// messages to check
-
-// FREE XP! for participation +13XP
-
-// ----------------------
-// PIT EVENT ENDED: ROBBERY [INFO]
-// Your rewards: +50g
-// Bonus for all: MISSED! need to be there at the beginning of the event
-// You: 50g (ranked #27)
-// Top players:
-//   #1 [88] Darkaid_ITA with 3136g
-//   #2 [92] Lion_134 with 1511g
-//   #3 [83] MorpheaZ with 1107g
-// ----------------------
-
-// QUICK MATHS! First 5 players to answer gain +250XP +500g
-// QUICK MATHS! Solve: 14x11
-// QUICK MATHS! #1 [63] Monecika answered in 3.65s
-// QUICK MATHS! #2 [77] Joontis answered in 4s
-// QUICK MATHS! #3 [64] samwy781 answered in 4.15s
-// QUICK MATHS! #4 [82] PiyanistMC answered in 5.05s
-// QUICK MATHS! #5 [82] LowTierFour answered in 5.55s
-// QUICK MATHS OVER! 14x11 = 154
-
-// MINOR EVENT! KOTL in Sky Area ende
