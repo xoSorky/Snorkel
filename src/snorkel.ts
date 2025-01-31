@@ -87,7 +87,7 @@ export class Snorkel {
             const msg2: string = msg.toString();
             console.log(msg2);
 
-            if (msg2.toLowerCase().includes(this.bot.username.toString().toLowerCase())) {
+            if ((msg2.toLowerCase()).includes(this.bot.username.toString().toLowerCase())) {
                 webhookMentioned(msg2)
             }
             if (msg2.startsWith("FREE XP! for participation ")) {
@@ -104,7 +104,7 @@ export class Snorkel {
                 await sleep(randWait);
                 quickMaths(msg2);
             }
-            if (msg2.toLowerCase().includes(this.bot.username.toString().toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
+            if ((msg2.toLowerCase()).includes(this.bot.username.toString().toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
                 webhookQuickMaths(msg2);
             }
             if (msg2.includes("MINOR EVENT!")) {
