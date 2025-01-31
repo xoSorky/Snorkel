@@ -100,9 +100,11 @@ export class Snorkel {
                 processXP(xpValue)
             }
             if (msg2.startsWith("QUICK MATHS! Solve: ")) {
+                let randWait = Math.random() + 0.5
+                await sleep(randWait);
                 quickMaths(msg2);
             }
-            if (msg2.includes("SnorkelOpps".toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
+            if (msg2.includes(this.bot.username.toString().toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
                 webhookQuickMaths(msg2);
             }
             if (msg2.includes("MINOR EVENT!")) {
