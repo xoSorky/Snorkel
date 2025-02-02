@@ -8,7 +8,7 @@ import { getActiveTime } from '../utils/date-handler.js'
 
 export function webhookMentioned(message: string) {
     if (process.env.SNORKEL_MENTIONS_WEBHOOK === undefined) {
-        console.error(`No Levels Channel Webhook. Please add one in the environment variables! (.env/SNORKEL_MENTIONS_WEBHOOK)`)
+        console.error(`No Mentions Channel Webhook. Please add one in the environment variables! (.env/SNORKEL_MENTIONS_WEBHOOK)`)
         return;
     }
     const webhook = new WebhookClient({ url: process.env.SNORKEL_MENTIONS_WEBHOOK });
