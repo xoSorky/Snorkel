@@ -8,6 +8,7 @@
     "dotenv": "^16.4.7",
     "env": "^0.0.2",
     "mineflayer": "^4.0.0",
+    "mineflayer-pathfinder": "^2.4.5",
     "prismarine-auth": "^2.6.0",
     "rimraf": "^6.0.1",
     "ts": "^0.0.0",

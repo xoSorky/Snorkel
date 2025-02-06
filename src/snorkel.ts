@@ -86,37 +86,39 @@ export class Snorkel {
         this.bot.on('message', async (msg: string) => {
             const msg2: string = msg.toString();
             console.log(msg2);
-
-            if ((msg2.toLowerCase()).includes(this.bot.username.toString().toLowerCase())) {
-                webhookMentioned(msg2)
-            }
-            if (msg2.startsWith("FREE XP! for participation ")) {
-                let contents = msg2.split("+");
-                let a = contents[1]
-                let b = a.split("XP")
-                let xpValue = Number(b[0]);
-                updateSessionXP(xpValue);
-                await sleep(1000);
-                processXP(xpValue)
-            }
-            if (msg2.startsWith("QUICK MATHS! Solve: ")) {
-                let randWait = Math.random() + 0.5
-                await sleep(randWait);
-                quickMaths(msg2);
-            }
-            if ((msg2.toLowerCase()).includes(this.bot.username.toString().toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
-                webhookQuickMaths(msg2);
-            }
-            if (msg2.includes("MINOR EVENT!")) {
-                webhookMinorEvent(msg2);
-            }
-            if (msg2.includes("PIT EVENT ENDED:") || msg2.includes("MAJOR EVENT!")) {
-                webhookMajorEvent(msg2);
-                await sleep(1000)
-                this.bot.chat("gg")
-            }
-            if (msg2.includes("PIT LEVEL UP!")) {
-                webhookLevelUp(msg2)
+            if (this.bot) {
+                if (msg2.startsWith("QUICK MATHS! Solve: ")) {
+                    let randWait = Math.floor((Math.random() + 0.5))
+                    setTimeout(() => {
+                        quickMaths(msg2);
+                    }, randWait);
+                }
+                if ((msg2.toLowerCase()).includes((this.bot.username.toString()).toLowerCase())) {
+                    webhookMentioned(msg2)
+                }
+                if (msg2.startsWith("FREE XP! for participation ")) {
+                    let contents = msg2.split("+");
+                    let a = contents[1]
+                    let b = a.split("XP")
+                    let xpValue = Number(b[0]);
+                    updateSessionXP(xpValue);
+                    await sleep(1000);
+                    processXP(xpValue)
+                }
+                if ((msg2.toLowerCase()).includes((this.bot.username.toString()).toLowerCase()) && msg2.startsWith("QUICK MATHS!")) {
+                    webhookQuickMaths(msg2);
+                }
+                if (msg2.startsWith("MINOR EVENT!")) {
+                    webhookMinorEvent(msg2);
+                }
+                if (msg2.startsWith("PIT EVENT ENDED:") || msg2.includes("MAJOR EVENT!")) {
+                    webhookMajorEvent(msg2);
+                    await sleep(1000)
+                    this.bot.chat("gg")
+                }
+                if (msg2.startsWith("PIT LEVEL UP!")) {
+                    webhookLevelUp(msg2)
+                }
             }
         });
         this.bot.on('physicsTick', async () => {
