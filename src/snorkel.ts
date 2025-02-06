@@ -88,7 +88,7 @@ export class Snorkel {
             console.log(msg2);
             if (this.bot) {
                 if (msg2.startsWith("QUICK MATHS! Solve: ")) {
-                    let randWait = Math.floor((Math.random() + 0.5))
+                    let randWait = ((Math.random() + 0.5)) * 1000
                     setTimeout(() => {
                         quickMaths(msg2);
                     }, randWait);
