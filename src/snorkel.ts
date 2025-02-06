@@ -94,7 +94,11 @@ export class Snorkel {
                     }, randWait);
                 }
                 if ((msg2.toLowerCase()).includes((this.bot.username.toString()).toLowerCase())) {
-                    webhookMentioned(msg2)
+                    let msg3 = msg2;
+                    if (msg2.includes(`${this.bot.username}: gg`)) return;
+                    else {
+                        webhookMentioned(msg3)
+                    }
                 }
                 if (msg2.startsWith("FREE XP! for participation ")) {
                     let contents = msg2.split("+");
